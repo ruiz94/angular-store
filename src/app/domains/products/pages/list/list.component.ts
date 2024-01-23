@@ -1,8 +1,9 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { ProductComponent } from '../../components/product/product.component';
 import { HeaderComponent } from '../../../shared/components/header/header.component';
 import { CommonModule } from '@angular/common';
 import type { Product } from '../../../shared/models/product.model';
+import { CartService } from '../../../shared/services/cart.service';
 
 @Component({
   selector: 'app-list',
@@ -12,7 +13,8 @@ import type { Product } from '../../../shared/models/product.model';
   styleUrl: './list.component.css'
 })
 export class ListComponent {
-  cart = signal<Product[]>([]);
+  private cartService = inject(CartService);
+  cart = this.cartService.cart
   products = signal<Product[]>([]);
 
   constructor() {
@@ -64,7 +66,6 @@ export class ListComponent {
   }
 
   addToCart(product: Product){
-    this.cart.update( prevState => [...prevState, product])
-
+    this.cartService.addToCart(product);
   }
 }
