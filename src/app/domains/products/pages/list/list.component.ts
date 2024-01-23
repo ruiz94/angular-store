@@ -12,7 +12,7 @@ import type { Product } from '../../../shared/models/product.model';
   styleUrl: './list.component.css'
 })
 export class ListComponent {
-
+  cart = signal<Product[]>([]);
   products = signal<Product[]>([]);
 
   constructor() {
@@ -63,8 +63,8 @@ export class ListComponent {
     this.products.set(initProducts)
   }
 
-  fromChild(event: string){
-    console.log("desde el padre: " + event);
+  addToCart(product: Product){
+    this.cart.update( prevState => [...prevState, product])
 
   }
 }
