@@ -11,7 +11,7 @@ import { CartService } from '@shared/services/cart.service';
   templateUrl: './product-detail.component.html',
   styleUrl: './product-detail.component.css'
 })
-export class ProductDetailComponent {
+export default class ProductDetailComponent {
   cartService = inject(CartService);
   private productService = inject(ProductService);
   @Input() id?: string;

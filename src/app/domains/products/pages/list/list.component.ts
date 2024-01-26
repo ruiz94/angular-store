@@ -15,7 +15,7 @@ import type { Category } from '@shared/models/category.model';
   templateUrl: './list.component.html',
   styleUrl: './list.component.css'
 })
-export class ListComponent {
+export default class ListComponent {
   private cartService = inject(CartService);
   private productService = inject(ProductService);
   private categoryService = inject(CategoryService);
@@ -51,7 +51,6 @@ export class ListComponent {
     this.categoryService.getAll()
     .subscribe({
       next: ( categories => {
-        console.log(categories);
         this.categories.set(categories);
       })
     })

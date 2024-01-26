@@ -1,11 +1,6 @@
 import { Routes } from '@angular/router';
 
-import { ListComponent } from '@products/pages/list/list.component';
-import { AboutComponent } from '@info/pages/about/about.component';
-import { NotFoundComponent } from '@info/not-found/not-found.component';
-import { ServicesComponent } from '@info/pages/services/services.component';
 import { LayoutComponent } from '@shared/components/layout/layout.component';
-import { ProductDetailComponent } from '@products/pages/product-detail/product-detail.component';
 
 export const routes: Routes = [
   {
@@ -14,24 +9,25 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        component: ListComponent,
+        // I'm doing a default export in the list.component file that´s why we don't use the .then callback like we're using in about path
+        loadComponent: () => import("@products/pages/list/list.component"),
       },
       {
         path: "about",
-        component: AboutComponent,
+        loadComponent: () => import("@info/pages/about/about.component").then(m => m.AboutComponent),
       },
       {
         path: "services",
-        component: ServicesComponent
+        loadComponent: () => import("@info/pages/services/services.component")
       },
       {
         path: "product/:id",
-        component: ProductDetailComponent
+        loadComponent: () =>  import("@products/pages/product-detail/product-detail.component")
       },
     ]
   },
   {
     path: "**",
-    component: NotFoundComponent
+    loadComponent: () => import("@info/not-found/not-found.component")
   }
 ];
