@@ -1,3 +1,4 @@
+import type { Category } from "./category.model";
 export interface Product {
   id: number;
   title: string;
@@ -8,9 +9,4 @@ export interface Product {
   category: Category
 }
 
-interface Category {
-  id: number,
-  image: string;
-  name: string;
-  updatedAt: string
-}
+
