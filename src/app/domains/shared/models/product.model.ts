@@ -4,4 +4,13 @@ export interface Product {
   price: number;
   images: string[];
   creationAt: string;
+  description: string;
+  category: Category
+}
+
+interface Category {
+  id: number,
+  image: string;
+  name: string;
+  updatedAt: string
 }
